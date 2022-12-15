@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación</title>
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/registra.css">
+    <link rel="shortcut icon" href="/img-accion/logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <!-- Header - menu -->
+    <header>
+
+        <script>
+            function mi_alerta() {
+                alert("Mensaje Enviado");
+            }
+        </script>
+
+        <div class="header-content">
+
+            <div class="logo">
+                <h1>A<b>20</b></h1>
+            </div>
+
+            <div class="menu" id="show-menu">
+
+                <nav>
+                    <ul>
+                        <li><a href="/index.html">Inicio</a></li>
+
+                        <li><a href="/blog.html">Videojuegos</a></li>
+
+                        <li><a href="/carrito/index.html">Carrito</a></li>
+
+                        <li class="menu-selected"><a href="/articulo.html" class="text-menu-selected">Blog</a></li>
+
+                        <li><a href="/contactos.html">Contacto</a></li>
+
+                        <li class="menu-selected"><a href="/resgitra.html">Ingresar</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+
+        <div id="icon-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    </header>
+
+    <!-- CONTENIDO -->
+
+    <h1 id="welcome" class="welcome">BIENVENIDO A A20</h1>
+
+    <div class="container">
+        <div id="seccionlogin" class="login">
+            <h3>Accede:</h3>
+            
+            <input id="usrL" type="email" placeholder= "Ingresa tu correo" class="input-contenedor">
+            <br>
+            <input id="pwdL" type="password" placeholder="Ingresa tu contraseña" class="input-contenedor">
+            <br>
+            <button id="btnLogin">Ingresar</button>
+            <br><br><br>
+        </div>
+    
+    
+        <div id="seccionlogout">
+            <button id="btnLogout">Salir</button>
+            <br><br><br>
+        </div>
+    
+        <div class="logout">
+            <h3>Registrate:</h3>
+            
+            <input id="usrR" type="email" placeholder="Ingresa tu correo" class="input-contenedor">
+            <br>
+            <input id="pwdR" type="password" placeholder="Ingresa tu contraseña" class="input-contenedor">
+            <br>
+            <button id="btnRegistro">Registrar</button>
+    
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+
+
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCAxh5s34pwtnfupgB7f5YN3CZJKB11B1Y",
+            authDomain: "login-lenguaje-web.firebaseapp.com",
+            projectId: "login-lenguaje-web",
+            storageBucket: "login-lenguaje-web.appspot.com",
+            messagingSenderId: "219718645476",
+            appId: "1:219718645476:web:67125d4aebfd1d91ee9ef1"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // Initialize Firebase Authentication and get a reference to the service
+        const auth = getAuth(app);
+
+        //click en login
+        document.getElementById("btnLogin").addEventListener("click", () => {
+
+            var email = document.getElementById("usrL").value;
+            var password = document.getElementById("pwdL").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // ...
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    console.log("Mensaje de error:" + errorMessage);
+                });
+        })
+
+        // click en registrar
+        document.getElementById("btnRegistro").addEventListener("click", () => {
+
+            var email = document.getElementById("usrR").value;
+            var password = document.getElementById("pwdR").value;
+
+            console.log("usr:" + email);
+            console.log("pwd:" + password);
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                    console.log("Mensaje de error:" + errorMessage);
+
+                });
+        })
+
+        // click en Logout
+        document.getElementById("btnLogout").addEventListener("click", () => {
+
+            signOut(auth).then(() => {
+                // Sign-out successful.
+                console.log("Cerrar sesion")
+            }).catch((error) => {
+                // An error happened.
+                console.log("Mensaje de error:");
+                console.log(error);
+
+            });
+        })
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const email = user.email;
+                document.getElementById("welcome").innerHTML =document.getElementById("welcome").innerHTML + " ," + email;
+                document.getElementById("seccionlogin").style.display="none";
+                document.getElementById("seccionlogout").style.display="block";
+
+                // ...
+            } else {
+                // User is signed out
+                // ...
+                document.getElementById("welcome").innerHTML = "BIENVENIDO A A20";
+                document.getElementById("seccionlogin").style.display="block";
+                document.getElementById("seccionlogout").style.display="none";
+            }
+        });
+
+    </script>
+
+    <!-- footer -->
+
+    <div class="container-footer">
+
+        <footer>
+            <div class="logo-footer">
+                <img src="/img-accion/logo.png" alt="">
+            </div>
+
+            <div class="redes-footer">
+                <a href="#"><i class="fab fa-facebook-f icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
+            </div>
+
+            <hr>
+            <h4>© 2020 MagtimusPro - Todos los Derechos Reservados</h4>
+
+        </footer>
+
+    </div>
+</body>
+</html>

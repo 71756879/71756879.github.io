@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos</title>
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/css/contactos.css">
+    <link rel="shortcut icon" href="/img-accion/logo.png" type="image/x-icon">
+
+</head>
+<body>
+    <!-- Header - menu -->
+    <header>
+
+        <script>
+            function mi_alerta () {
+                alert ("Mensaje Enviado");
+                }
+        </script>
+
+        <div class="header-content">
+
+            <div class="logo">
+                <h1>A<b>20</b></h1>
+            </div>
+
+            <div class="menu" id="show-menu">
+
+                <nav>
+                    <ul>
+                        <li><a href="/index.html">Inicio</a></li>
+
+                        <li><a href="/blog.html">Videojuegos</a></li>
+
+                        <li><a href="/carrito/index.html">Carrito</a></li>
+
+                        <li class="menu-selected"><a href="/articulo.html" class="text-menu-selected">Blog</a></li>
+
+                        <li><a href="/contactos.html">Contacto</a></li>
+
+                        <li class="menu-selected"><a href="/resgitra.html">Ingresar</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+
+        <div id="icon-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    </header>
+
+    <!-- contenido -->
+
+    <div class="container">
+        <form>
+            <h1 class="form-tittle">C<span>ontactanos</span></h1>
+
+            <label for="nombre" class="form-label"></label>
+            <input type="text" id="nombre" placeholder="Ingrese su Nombre">
+
+            <label for="Correo" class="form-label"></label>
+            <input type="email" id="Correo" placeholder="Correo Electronico">
+
+            <label for="mensaje" class="form-label"></label>
+            <textarea id="mensaje" placeholder="Mensaje"></textarea>
+            <button onClick="mi_alerta()">Enviar Mensaje</button> 
+        </form>
+    </div>
+
+    <!-- footer -->
+
+    <div class="container-footer">	
+
+        <footer>
+            <div class="logo-footer">
+                <img src="/img-accion/logo.png" alt="">
+            </div>
+
+            <div class="redes-footer">
+                <a href="#"><i class="fab fa-facebook-f icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g icon-redes-footer"></i></a>
+                <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
+            </div>
+
+            <hr>
+            <h4>© 2020 MagtimusPro - Todos los Derechos Reservados</h4>
+
+        </footer>
+
+    </div>
+
+
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
